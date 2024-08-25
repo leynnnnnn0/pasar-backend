@@ -6,16 +6,13 @@ import fileRoute from "./routes/file.route.js";
 import authRoute from "./routes/auth.route.js";
 import oauthRoute from "./routes/oauth.route.js";
 import openaiRoute from "./routes/openai.route.js";
-import {connectDb} from "./config/db.js";
 import userRoute from "./routes/user.route.js";
 
 dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000'
-}));
+app.use(cors());
 app.use(fileUpload());
 
 app.use("/api/file", fileRoute);
@@ -25,7 +22,6 @@ app.use("/api/openai", openaiRoute);
 app.use("/api/user", userRoute);
 
 app.listen(process.env.PORT, () => {
-    connectDb();
     console.log('Server running on port 8080');
 });
 
